@@ -1,0 +1,23 @@
+name: API Status Webhook
+
+on:
+  repository_dispatch:
+    types: [status-check]
+
+jobs:
+  respond-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Handle API Request
+        uses: actions/checkout@v4  # Não precisa de checkout real, mas mantém simples
+        
+      - name: Respond with Status
+        run: |
+          # Status desejado (mude aqui para "on" ou "off")
+          STATUS="on"
+          
+          # Resposta JSON limpa
+          echo "{\"status\":\"$STATUS\"}"
+          
+          # Simula resposta HTTP (Actions envia via webhook, mas para teste, loga)
+          echo "API Response: {\"status\":\"$STATUS\"}"
